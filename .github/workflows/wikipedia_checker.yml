@@ -1,0 +1,32 @@
+name: Wikipedia Checker
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create Google credentials
+        run: |
+          printf '%s' '${{ secrets.GOOGLE_CREDENTIALS }}' > credentials.json
+          printf '%s' '${{ secrets.GOOGLE_TOKEN }}' > token.json
+
+      - name: Run Wikipedia Checker
+        env:
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+        run: |
+          python wikipedia_checker.py
