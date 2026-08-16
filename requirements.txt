@@ -1,0 +1,7 @@
+# Python 3.12-compatible, conservative pins for this scraper
+beautifulsoup4==4.12.3
+natsort==8.4.0
+python-slugify==8.0.4
+google-api-python-client==2.198.0
+google-auth-httplib2==0.4.1
+google-auth-oauthlib==1.4.0

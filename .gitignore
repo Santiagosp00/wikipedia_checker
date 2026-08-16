@@ -1,0 +1,149 @@
+# =========================
+# General
+# =========================
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.lock
+*.orig
+*.old
+*.cache
+*.temp
+~$*
+
+# =========================
+# OS-specific files
+# =========================
+# macOS
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# =========================
+# IDEs and Editors
+# =========================
+# VSCode
+.vscode/
+.history/
+
+# JetBrains (PyCharm, IntelliJ, etc.)
+.idea/
+*.iml
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.pyc
+*.py[cod]
+*$py.class
+env/
+venv/
+ENV/
+.venv/
+.env
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# =========================
+# Virtual environments & dependencies
+# =========================
+# Conda
+.conda/
+conda-meta/
+
+# Poetry
+.poetry/
+
+# =========================
+# Notebooks / Data / Models
+# =========================
+# Large or generated data files
+data/
+datasets/
+*.csv
+*.tsv
+*.xls*
+*.parquet
+*.h5
+*.pkl
+*.joblib
+
+# Machine learning models
+*.pt
+*.h5
+*.ckpt
+*.onnx
+*.pb
+*.tflite
+*.model
+
+# =========================
+# Logs & Reports
+# =========================
+logs/
+*.log
+*.out
+*.err
+
+# =========================
+# Others
+# =========================
+# Compiled C/C++
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.out
+
+# Backup and archive files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# =========================
+# Project-specific (optional)
+# =========================
+# Uncomment if you use notebooks or scripts that generate plots
+# outputs/
+# figures/
+# results/
+credentials.json
+token.json
