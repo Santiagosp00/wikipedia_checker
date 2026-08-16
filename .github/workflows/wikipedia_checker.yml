@@ -3,6 +3,9 @@ name: Wikipedia Checker
 on:
   workflow_dispatch:
 
+  schedule:
+    - cron: "0 23 14,28 * *"
+
 jobs:
   run:
     runs-on: ubuntu-latest
