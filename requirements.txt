@@ -16,3 +16,5 @@ httplib2>=0.22.0
 
 # Utilities
 python-dotenv>=1.0.0
+
+lxml>=6.1.1
