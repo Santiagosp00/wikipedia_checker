@@ -4,6 +4,7 @@ import os
 from datetime import timedelta
 from email.message import EmailMessage
 
+from google.auth.exceptions import RefreshError
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -38,28 +39,47 @@ def get_google_credentials():
             GOOGLE_TOKENS_FILE,
             SCOPES
         )
+        
+    if creds and creds.valid:
+        logger.info("Google credentials are valid")
+        return creds
 
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            logger.info("Refreshing expired credentials")
+    if creds and creds.expired and creds.refresh_token:
+        logger.info("Refreshing expired credentials")
+
+        try:
             creds.refresh(Request())
-        else:
-            logger.info(
-                "Creating new credentials from %s",
-                GOOGLE_CREDENTIALS_FILE
-            )
-            flow = InstalledAppFlow.from_client_secrets_file(
-                GOOGLE_CREDENTIALS_FILE,
-                SCOPES
-            )
-            creds = flow.run_local_server(port=0)
-            logger.info("New credentials created via OAuth flow")
 
-        with open("token.json", "w") as token:
-            token.write(creds.to_json())
-        logger.debug("Credentials saved to token.json")
+            with open(GOOGLE_TOKENS_FILE, "w") as token:
+                token.write(creds.to_json())
 
-    logger.info("Google credentials obtained successfully")
+            logger.info("Google credentials refreshed successfully")
+            return creds
+
+        except RefreshError:
+            logger.exception(
+                "Google refresh token is invalid or revoked. "
+                "A new OAuth authorization is required."
+            )
+            raise
+
+    logger.info(
+        "No usable credentials found. Starting OAuth flow from %s",
+        GOOGLE_CREDENTIALS_FILE
+    )
+
+    flow = InstalledAppFlow.from_client_secrets_file(
+        GOOGLE_CREDENTIALS_FILE,
+        SCOPES
+    )
+
+    creds = flow.run_local_server(port=0)
+
+    with open(GOOGLE_TOKENS_FILE, "w") as token:
+        token.write(creds.to_json())
+
+    logger.info("New credentials created via OAuth flow")
+
     return creds
 
 
